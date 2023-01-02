@@ -10,9 +10,8 @@ import api from '../../Api/appointments';
 import SchedulerCopy from "../Scheduler/SchedulerCopy";
 import { HomeOptionContext } from "./HomeOptionContext";
 import HomeOptionProvider from "./HomeOptionContext";
-import { AppointmentProvider } from "../Scheduler/AppointmentContext";
 
-export const ACTION = {
+const ACTION = {
     HOME : "home",
     CREATE: "create appointment",
     CHECK: "check appointment",
@@ -20,20 +19,30 @@ export const ACTION = {
 
 export default function Home() {
 
-    const {option, prevOption} = useContext(HomeOptionContext);
-    const [selectedOption, setSelectedOption] = option;
-    // const [events, setEvents] = useState([]);
+    const [selectedOption, setSelectedOption] = useContext(HomeOptionContext);
 
-    // function addEvents(event){
-    //     setEvents((prevEvents)=>{
-    //        return [...prevEvents, event]
-    //     });
-    // }
+    function addEvents(event){
 
+        // const request = event;
+        // const response = api.post("/appointments", {
+        //     startDateTime: request.startTime,
+        //     endDateTime: request.endTime,
+        //     title: request.title,
+        //     description: request.description
+        // });
 
+        // console.log(response.status);
+
+        setEvents((prevEvents)=>{
+           return [...prevEvents, event]
+        });
+        // setEvents((prevEvents)=>{
+        //    return [...prevEvents, response.data]
+        // });
+    }
 
     return (
-        <>
+        <HomeOptionProvider>
             <div className="align-centre">
                 {selectedOption === ACTION.HOME &&
                 <Card>
@@ -58,13 +67,10 @@ export default function Home() {
                         Check Appointments
                     </button>
                 </Card>}
-                {selectedOption === ACTION.CREATE && <CreateEvent prevPage={'home'}/>}
+                {selectedOption === ACTION.CREATE && <CreateEvent prevSelectedOption = {null} resetSelectedOption = {resetSelectedOption} addEvents = {addEvents}/>}
                 {/* {selectedOption === ACTION.CHECK && <Scheduler prevSelectedOption = {null} resetSelectedOption = {resetSelectedOption} events={events}/>} */}
-                {selectedOption === ACTION.CHECK && 
-                    <AppointmentProvider>
-                        <SchedulerCopy/>
-                    </AppointmentProvider>}
+                {selectedOption === ACTION.CHECK && <SchedulerCopy prevSelectedOption = {null} resetSelectedOption = {resetSelectedOption} events={events}/>}
             </div>
-        </>
+        </HomeOptionProvider>
     );
 }

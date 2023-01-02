@@ -1,14 +1,18 @@
 import moment from "moment";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Card from "../../Features/Card/Card";
-import api from '../../Api/appointments';
+import api from "../../Api/appointments";
 import "./CreateEvent.scss";
+import NotifyCard from "../../Features/NotifyCard/NotifyCard";
+import { HomeOptionContext } from "../Home.jsx/HomeOptionContext";
 
-export default function CreateEvent({
-  prevSelectedOption,
-  resetSelectedOption,
-  addEvents,
-}) {
+
+export default function CreateEvent({prevPage}) {
+  const {option, prevOption, eventList} = useContext(HomeOptionContext);
+  const [selectedOption, setSelectedOption] = option;
+  const [events, setEvents] = eventList;
+
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [startTime, setStartTime] = useState(
@@ -19,6 +23,8 @@ export default function CreateEvent({
   );
 
   const [event, setEvent] = useState({});
+  const [responseMessage, setResponseMessage] = useState({});
+  const [isNotifyPopupVisible, setIsNotifyPopupVisible] = useState(false);
 
   function clearInputValues() {
     setTitle("");
@@ -28,6 +34,15 @@ export default function CreateEvent({
     setEvent({});
   }
 
+  function NotifyPopup() {
+    setTimeout(() => {
+      setIsNotifyPopupVisible(true);
+      setTimeout(() => {
+        setIsNotifyPopupVisible(false);
+      }, 2000);
+    }, 300);
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     event.title = title;
@@ -35,13 +50,43 @@ export default function CreateEvent({
     event.startTime = startTime;
     event.endTime = endTime;
 
-    addEvents(event);
-    clearInputValues();
-    resetSelectedOption(prevSelectedOption);
+    const request = event;
+    const response = api.post("/appointments", {
+      startDateTime: request.startTime,
+      endDateTime: request.endTime,
+      title: request.title,
+      description: request.description,
+    });
+
+    api
+      .post("/appointments", {
+        startDateTime: request.startTime,
+        endDateTime: request.endTime,
+        title: request.title,
+        description: request.description,
+      })
+      .then((response) => {
+        setResponseMessage(response);
+        NotifyPopup();
+        setTimeout(()=>{
+          // addEvents(response.data);
+          setEvents((prevEvents)=>{
+            return [...prevEvents, response.data]
+          })
+          clearInputValues();
+          setSelectedOption(prevPage);
+        },2000)
+      })
+      .catch((error) => {
+        console.log(error);
+        setResponseMessage(error.response);
+        NotifyPopup();
+      });
   }
 
   return (
     <div className="align-centre">
+      {isNotifyPopupVisible && <NotifyCard message={responseMessage} />}
       <Card>
         <div>
           <h2>Add appointment</h2>
@@ -54,11 +99,11 @@ export default function CreateEvent({
                 type="text"
                 value={title}
                 placeholder="Title"
+                required
                 onChange={(e) => {
                   e.preventDefault();
                   setTitle(e.target.value);
                 }}
-                
               ></input>
             </div>
             <div className="time-group">
@@ -99,14 +144,18 @@ export default function CreateEvent({
               />
             </div>
             <div className="button-group">
-              <button className="custom-button-large" type="submit" onClick={handleSubmit}>
+              <button
+                className="custom-button-large"
+                type="submit"
+                onClick={handleSubmit}
+              >
                 Create
               </button>
               <button
                 className="custom-button-large"
                 onClick={(e) => {
                   e.preventDefault();
-                  resetSelectedOption(prevSelectedOption);
+                  setSelectedOption(prevPage);
                 }}
               >
                 Cancel

@@ -1,0 +1,24 @@
+.timeline{
+    display: flex;
+    min-height: 60px;
+    width: 90%;
+    background-color: white;
+    // padding-bottom: 2px;
+    position: relative;
+    border-top: 0.1px dotted rgb(212, 212, 212);
+
+}
+
+.time{
+    border-right: 0.25px dotted rgb(212, 212, 212);
+    padding: 0px 5px;
+}
+
+.events{
+    position: absolute;
+    width: 80%;
+    top: 0;
+    left: 74px;
+    padding: 10px;
+    margin-top: 12px;
+}

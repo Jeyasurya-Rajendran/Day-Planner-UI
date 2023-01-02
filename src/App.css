@@ -2,3 +2,7 @@ body{
     font-family: 'Roboto';
     
 }
+
+:root{
+    --bg-blue : blue;
+}
