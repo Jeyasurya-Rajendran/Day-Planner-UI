@@ -1,5 +1,12 @@
 .popup-container{
-    position: fixed;
+    background-color: var(--color-light);
+    padding: 50px;
+    border-radius: 20px;
+    
+    h3{
+        margin-top: 0px;
+    }
+    
 
     .popup-message{
         display: flex;
@@ -7,8 +14,12 @@
         justify-content: center;
         font-weight: bold;
     }
-    .popup-btn-grp{
+    .popup-button-grp{
         margin-top: 0px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        margin-top: 20px;
     }
 }
 
@@ -22,4 +33,5 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 3;
 }

@@ -1,8 +1,10 @@
-import React from "react";
-import "./CustomButton.scss";
+// import React, { Children } from "react";
+// import "./CustomButton.scss";
 
-export default function CustomButton(props){
-    <button className="custom-button">
-        {props.children}
-    </button>
-}
+// export default function CustomButton({children}){
+//     return(
+//         <button className="button-component">
+//             {children}
+//         </button>
+//     )
+// }

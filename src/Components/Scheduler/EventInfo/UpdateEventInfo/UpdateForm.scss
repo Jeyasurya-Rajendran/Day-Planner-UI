@@ -1,0 +1,26 @@
+.update-event-container{
+    padding: 20px;
+    z-index: 3;
+    position: fixed;
+    background-color: var(--color-light);
+    display: flex;
+    flex-direction: column;
+    right: 10px;
+    top: 50px;
+    width: 400px;
+    border-radius: 20px;
+
+    .event-form{
+        margin-top: 20px;
+        gap: 15px;
+
+        .time-group{
+            gap: 30px;
+            flex-direction: column;
+        }
+    }
+    .button-group{
+        margin-top: 0px;
+    }
+
+}

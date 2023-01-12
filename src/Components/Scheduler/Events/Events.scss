@@ -1,0 +1,24 @@
+.event{
+    position: absolute;
+    background-color: var(--color-light);
+    color: var(--color-black);
+    width: 90%;
+    border-radius: 20px;
+    padding: 10px 22px;
+    left: 45px;
+    box-shadow: 1px 3px 7px var(--color-dominant);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    line-height: 2;
+    transition: height 1s all;
+    // border-left: 5px solid var(--color-dominant);
+    cursor: pointer;
+
+    .event-title{
+        border-left: 2px solid var(--color-dominant);
+        font-weight: bold;
+        padding-left: 10px;
+    }
+}   

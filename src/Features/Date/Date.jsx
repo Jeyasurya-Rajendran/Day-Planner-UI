@@ -1,25 +1,25 @@
 import moment from "moment";
 import React, { useState, useContext } from "react";
 import "./Date.scss";
-import { AppointmentContext } from "../../Components/Scheduler/AppointmentContext";
+import { AppointmentContext } from "../../Context/AppointmentContext";
 
 export default function Date() {
-  const { date, changeDate } = useContext(AppointmentContext);
+  const { date, toggleDatePickerVisibility } = useContext(AppointmentContext);
   const [currentDate, setCurrentDate] = date;
-  const [isChangeDate, setIsChangeDate] = changeDate;
+  const [isDatePickerVisible, setisDatePickerVisible] = toggleDatePickerVisibility;
 
-  const [dateValue, setDateValue] = useState(moment().format("YYYY-MM-DD"));
+  const [dateValue, setDateValue] = useState(moment(currentDate).format("YYYY-MM-DD"));
 
   return (
-    <>
+    <div className="date-input">
       <input
-        style={{ marginBottom: "13px" }}
         type={"date"}
         value={dateValue}
         onChange={(e) => {
           e.preventDefault();
           setDateValue(e.target.value);
         }}
+        contentEditable="false"
       />
       <button
         type="submit"
@@ -27,11 +27,11 @@ export default function Date() {
         onClick={(e) => {
           e.preventDefault();
           setCurrentDate(dateValue);
-          setIsChangeDate(false);
+          setisDatePickerVisible(false);
         }}
       >
         OK
       </button>
-    </>
+    </div>
   );
 }

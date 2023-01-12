@@ -1,0 +1,74 @@
+.scheduler-segment{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 50px;
+    gap: 24px;
+
+}
+
+.custom-button{
+    width: 90px;
+    padding: 10px 22px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+}
+
+.custom-button-large{
+    padding: 16px 20px;
+    border-radius: 15px;
+    outline: none;
+    border: none;
+}
+
+.calendar-create-segment{
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+}
+
+.button-dark{
+    background-color: var(--color-black);
+    box-shadow: 5px 5px 6px rgb(255 255 255 / 40%);
+    color: var(--color-white);
+}
+.button-light{
+    background-color: var(--color-white);
+    box-shadow:5px 5px 3px rgba(black, 0.1);
+}
+
+// .create-button{
+//     position: absolute;
+//     bottom: 35px;
+//     right: 50px;
+//     z-index: 10;
+//     display: inline-flex;
+//     overflow: hidden;
+
+//     width: auto;
+//     max-width: 39px;
+//     -webkit-transition: max-width 0.5s;
+//     transition: max-width 0.5s;
+    
+//     border-radius: 20px;
+//     background-color: var(--color-dominant);
+//     color: var(--color-light);
+
+
+
+//     .create-button-icon{
+//         padding-left: 2px;
+//         padding-right: 12px;
+//     }
+
+//     .create-button-name{
+//         white-space: nowrap; 
+//         padding-right: 12px;  
+//     }
+// }
+
+// .create-button:hover {
+//     max-width: 200px;
+// }
