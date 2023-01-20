@@ -1,7 +1,7 @@
 import React from "react";
 import "./ConfirmPopup.scss";
 
-export default function ConfirmPopup({ message, eventStyle, cancel, event, dispatch }) {
+export default function ConfirmPopup({ message, eventStyle, cancel, event, dispatch, type }) {
   return (
     <div className="overlay">
       <div className="popup-container">
@@ -12,8 +12,7 @@ export default function ConfirmPopup({ message, eventStyle, cancel, event, dispa
               className="custom-button button-light"
               onClick={(e) => {
                 e.preventDefault();
-                dispatch({ type: "confirm", payload: { event: event } });
-                cancel();
+                dispatch({ type: type, payload: { event: event } });
               }}
             >
               Yes
@@ -23,7 +22,6 @@ export default function ConfirmPopup({ message, eventStyle, cancel, event, dispa
               onClick={(e) => {
                 e.preventDefault();
                 cancel();
-                // dispatch({ type: "cancel", payload: { event: event } });
               }}
             >
               Cancel

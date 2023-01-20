@@ -1,20 +1,27 @@
 import moment from "moment";
 import React, {useState} from "react";
 import { convertDate } from "../../Events/Events";
-import "./UpdateForm.scss"
+import "./UpdateForm.scss";
 
-export default function UpdateEventForm({cancel, updatePost, event }) {
+export default function UpdateEventForm({cancel, updatePost, event, dispatch }) {
 
   const [title, setTitle] = useState(event.title);
   const [description, setDescription] = useState(event.description);
-  const [startTime, setStartTime] = useState(event.startDateTime);
-  const [endTime, setEndTime] = useState(event.endDateTime);
-
-  console.log(startTime,endTime);
+  const [startDateTime, setStartTime] = useState(event.startDateTime);
+  const [endDateTime, setEndTime] = useState(event.endDateTime);
 
   return (
     <>
-      <form className="event-form" onSubmit={(e)=>{e.preventDefault(); updatePost();}}>
+      <form className="event-form" onSubmit={(e)=>{
+          e.preventDefault(); 
+          updatePost(
+            {
+              title:title,
+              description:description,
+              startDateTime:startDateTime,
+              endDateTime:endDateTime
+            }
+          );}}>
         <div className="text-input">
           <label className="text-title">Title</label>
           <input
@@ -36,7 +43,7 @@ export default function UpdateEventForm({cancel, updatePost, event }) {
             <label>From</label>
             <input
               type="datetime-local"
-              value={startTime}
+              value={startDateTime}
               required
               onChange={(e) => {
                 e.preventDefault();
@@ -48,7 +55,7 @@ export default function UpdateEventForm({cancel, updatePost, event }) {
             <label>To</label>
             <input
               type="datetime-local"
-              value={endTime}
+              value={endDateTime}
               onChange={(e) => {
                 e.preventDefault();
                 setEndTime(e.target.value);

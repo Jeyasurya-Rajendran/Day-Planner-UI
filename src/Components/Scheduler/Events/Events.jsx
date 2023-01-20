@@ -4,30 +4,24 @@ import "./Events.scss";
 import EventInfo from "../EventInfo/EventInfo";
 import api from "../../../Api/appointments";
 import { AppointmentContext } from "../../../Context/AppointmentContext";
-import Card from "../../../Features/Card/Card";
-
+import {
+  getAppointmentApi,
+  deleteAppointmentApi,
+  updateAppointmentApi,
+} from "../../../Api/apiCalls";
+import NotifyCard from "../../../Features/NotifyCard/NotifyCard";
 export const eventStyling = (startTime, endTime) => {
   const StartTime = moment(convertDate(startTime)).format();
   const EndTime = moment(convertDate(endTime)).format();
 
   const top = moment(StartTime).hours() * 60 + moment(StartTime).minutes();
-  const height = moment(EndTime).diff(moment(StartTime), "minutes") -20;
+  const height = moment(EndTime).diff(moment(StartTime), "minutes") - 20;
   const fontSize = height < 15 ? "10px" : "16px";
- 
-  // if((top>1200)){
-  //   let bottom = -(top+height+20);
-  //   return{
-  //     bottom: bottom,
-  //     height: height,
-  //     fontSize: fontSize
-  //   }
-  // }
 
   return {
     top: top,
     height: height,
     fontSize: fontSize,
-    // bottom: bottom
   };
 };
 
@@ -43,11 +37,17 @@ function reducer(state, action) {
         eventInfoClicked: !state?.eventInfoClicked,
         event: action.payload.event,
       };
-    case "confirm":
+    case "delete":
       return {
         ...state,
         eventInfoClicked: !state?.eventInfoClicked,
         deleteEvent: action.payload?.event,
+      };
+    case "update":
+      return {
+        ...state,
+        eventInfoClicked: !state?.eventInfoClicked,
+        updateEvent: action.payload.event,
       };
     case "cancel":
       return {
@@ -62,40 +62,70 @@ export default function Events() {
   const [state, dispatch] = useReducer(reducer, {
     eventInfoClicked: false,
     deleteEvent: {},
+    updateEvent: {},
     event: {},
   });
 
-  const { appointments, date } =
-    useContext(AppointmentContext);
+  const { appointments, date } = useContext(AppointmentContext);
   const [events, setEvents] = appointments;
   const [currentDate, setCurrentDate] = date;
+  const [isNotifyPopupVisible, setIsNotifyPopupVisible] = useState(false);
+  const [responseMessage, setResponseMessage] = useState({});
+
+  function NotifyPopup() {
+    setTimeout(() => {
+      setIsNotifyPopupVisible(true);
+      setTimeout(() => {
+        setIsNotifyPopupVisible(false);
+      }, 4000);
+    }, 300);
+  }
 
   useEffect(() => {
     if (state.deleteEvent.startDateTime) {
-      api
-        .delete("/appointments/" + state.deleteEvent.startDateTime)
-        .then(() => {
-          console.log("success");
-        });
-      const result = events.filter(
-        (events) => events.startDateTime !== state.deleteEvent.startDateTime
-      );
-      setEvents(result);
+      deleteAppointmentApi(state.deleteEvent.id)
+      .then(()=>{
+        setEvents(()=>{
+          events.filter((event)=>event.startDateTime !== state.deleteEvent.startDateTime);
+        })
+      });
     }
   }, [state.deleteEvent]);
+
+  useEffect(() => {
+    if (state.updateEvent.startDateTime) {
+      console.log(state.updateEvent);
+      updateAppointmentApi(state.event.id, state.updateEvent)
+      .then((response) => {
+        setResponseMessage(response);
+        setEvents((prevEvents)=>{
+          return [...prevEvents, state.event]
+          });
+        NotifyPopup();
+      })
+      .catch((error) => {
+        console.log(error.response);
+        setResponseMessage(error.response);
+        NotifyPopup();
+      });
+    }
+  }, [state.updateEvent]);
 
   const [response, setResponse] = useState([]);
 
   useEffect(() => {
-    api
-      .get("/appointments?date=" + moment(currentDate).format("YYYY-MM-DD"))
-      .then((response) => {
-        setResponse(response.data);
-      });
-  }, [events,currentDate]);
+    getAppointmentApi(currentDate).then((data) => {
+      setResponse(data);
+    });
+  }, [events, currentDate]);
 
   return (
     <>
+      {isNotifyPopupVisible && (
+        <div>
+          <NotifyCard response={responseMessage} />
+        </div>
+      )}
       {response?.map((event) => {
         return (
           <div
@@ -114,6 +144,16 @@ export default function Events() {
       {state.eventInfoClicked && (
         <EventInfo event={state.event} dispatch={dispatch} />
       )}
+
+      {/* {isConfirmationPopupVisible && (
+        <ConfirmPopup
+          message={"Do you want to update?"}
+          cancel={cancel}
+          event={updateEvent}
+          dispatch={dispatch}
+          type='update'
+        />
+      )} */}
     </>
   );
 }

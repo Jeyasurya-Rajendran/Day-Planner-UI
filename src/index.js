@@ -11,7 +11,7 @@ root.render(
   // </React.StrictMode>
 );
 
-const modal = ReactDOM.createPortal(document.getElementById('modal'));
+// const modal = ReactDOM.createPortal(document.getElementById('modal'));
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

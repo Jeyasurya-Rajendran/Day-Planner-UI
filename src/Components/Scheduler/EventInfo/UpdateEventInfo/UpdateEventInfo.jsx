@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "../../../../Features/Card/Card";
 import UpdateEventForm from "./UpdateForm";
+import ConfirmPopup from "../../../../Features/ConfirmationCard/ConfirmPopup";
 
 export default function UpdateEvent({ cancel, event, dispatch }) {
-  function updatePost() {}
+
+  const [isConfirmationPopupVisible, setIsConfirmationPopupVisible] = useState(false);
+  const [updateEvent, setUpdateEvent] = useState({});
+  function updatePost(inputEvent) {
+    dispatch({ type: 'update', payload: { event: inputEvent } });
+  }
+  
   return (
     <>
       <Card>
@@ -13,6 +20,7 @@ export default function UpdateEvent({ cancel, event, dispatch }) {
             cancel={cancel}
             updatePost={updatePost}
             event={event}
+            dispatch={dispatch}
           />
         </div>
       </Card>

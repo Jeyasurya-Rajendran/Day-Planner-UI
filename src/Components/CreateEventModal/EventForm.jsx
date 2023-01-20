@@ -92,11 +92,17 @@ export default function EventForm({ addPost, toggleCreateEventVisibility }) {
             />
           </div>
           <div className="button-group">
-            <button className="custom-button-large button-dark" type="submit">
-              Create
+          <button
+              className="custom-button-large button-light"
+              onClick={(e) => {
+                e.preventDefault();
+                clearInputValues();
+              }}
+            >
+              Reset
             </button>
             <button
-              className="custom-button-large"
+              className="custom-button-large button-light"
               onClick={(e) => {
                 e.preventDefault();
 
@@ -105,14 +111,8 @@ export default function EventForm({ addPost, toggleCreateEventVisibility }) {
             >
               Cancel
             </button>
-            <button
-              className="custom-button-large"
-              onClick={(e) => {
-                e.preventDefault();
-                clearInputValues();
-              }}
-            >
-              Reset
+            <button className="custom-button-large button-dark" type="submit">
+              Create
             </button>
           </div>
         </form>

@@ -23,16 +23,16 @@
 }
 
 .event-input-title{
-    background-color: rgba(white,0.9);
     padding: 0px 10px;
-    border-radius: 20px;
     color: var(--color-black);
-    width: max-content;
+    text-decoration: underline 1px;
+    text-underline-offset: 10px;
 }
 
 .event-form-styling{
     padding: 30px 41px;
-    background-color: #b8afd08a;
+    background-image: url(../../Asserts/Background.svg);
+    backdrop-filter: blur(10px);
     border-radius: 20px;
 }
 

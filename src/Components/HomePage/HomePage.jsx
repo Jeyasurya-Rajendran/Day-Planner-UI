@@ -15,8 +15,6 @@ export default function HomePage() {
   
   const [isCreateEventVisible, setIsCreateEventVisible] = useState(false);
 
-  console.log("Hello");
-
   function toggleCreateEventVisibility(){
     setIsCreateEventVisible(!isCreateEventVisible);
   }
@@ -25,9 +23,6 @@ export default function HomePage() {
     <div className="scheduler-segment">
       {isCreateEventVisible && <CreateEvent toggleCreateEventVisibility = {toggleCreateEventVisibility}/>}
       <EventsContainer />
-      {/* <Card>
-        
-      </Card> */}
       <Card>
         <div className="calendar-create-segment">
           <Calendar />

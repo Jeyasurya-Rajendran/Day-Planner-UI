@@ -18,9 +18,6 @@ export default function EventsContainer({ response }) {
     setIsCreateEventVisible(!isCreateEventVisible);
   }
 
-
-  console.log("hi");
-
   return (
     <>
       {isCreateEventVisible && <CreateEvent toggleCreateEventVisibility = {toggleCreateEventVisibility}/>}

@@ -15,22 +15,23 @@ const eventStyling = (startTime, endTime) => {
   const StartTime = moment(convertDate(startTime)).format();
   const EndTime = moment(convertDate(endTime)).format();
 
-
   const top = moment(StartTime).hours() * 60 + moment(StartTime).minutes();
   const height = moment(EndTime).diff(moment(StartTime), "minutes") -20;
 
-  console.log(startTime,moment(startTime));
+  let minHeight = (height>114)? height : "auto";
+
   if (top > 1200) {
     let bottom = -(top + height + 20);
     return {
       bottom: bottom,
+      minHeight: minHeight
     };
   }
-
-
-    return {
-      top: top,
-    };
+  
+  return {
+    top: top,
+    minHeight: minHeight
+  };
 };
 
 export default function EventInfo({ event, dispatch }) {
@@ -112,6 +113,7 @@ export default function EventInfo({ event, dispatch }) {
           cancel={CancelConfirmation}
           event={event}
           dispatch={dispatch}
+          type='delete'
         />
       )}
     </>

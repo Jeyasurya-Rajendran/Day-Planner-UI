@@ -1,10 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useCallback, useEffect } from "react";
 import Card from "../../Features/Card/Card";
 import api from "../../Api/appointments";
 import "./CreateEvent.scss";
 import NotifyCard from "../../Features/NotifyCard/NotifyCard";
 import EventForm from "./EventForm";
 import { AppointmentContext } from "../../Context/AppointmentContext";
+import { createAppointmentApi } from "../../Api/apiCalls";
 
 export default function CreateEventModal({ toggleCreateEventVisibility }) {
   const { appointments } = useContext(AppointmentContext);
@@ -24,15 +25,8 @@ export default function CreateEventModal({ toggleCreateEventVisibility }) {
   }
 
   function addPost(request) {
-    api
-      .post("/appointments", {
-        startDateTime: request.startTime,
-        endDateTime: request.endTime,
-        title: request.title,
-        description: request.description,
-      })
+    createAppointmentApi(request)
       .then((response) => {
-        console.log(response);
         setResponseMessage(response);
         NotifyPopup();
         setEvents((prevEvents) => {
@@ -43,16 +37,29 @@ export default function CreateEventModal({ toggleCreateEventVisibility }) {
         }, 1000);
       })
       .catch((error) => {
-        console.log(error);
         setResponseMessage(error.response);
         NotifyPopup();
       });
   }
 
+  const escFunction = useCallback((event) => {
+    if (event.key === "Escape") {
+      toggleCreateEventVisibility();
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keydown", escFunction, false);
+
+    return () => {
+      document.removeEventListener("keydown", escFunction, false);
+    };
+  }, []);
+
   return (
     <>
-      <div className="create-page">
-        <div className="create-event overlay">
+      <div className="create-page overlay">
+        <div className="create-event">
           {isNotifyPopupVisible && (
             <div>
               <NotifyCard response={responseMessage} />
