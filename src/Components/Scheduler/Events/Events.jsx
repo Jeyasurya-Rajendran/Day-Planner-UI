@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useReducer, useState } from "react";
 import moment from "moment";
 import "./Events.scss";
 import EventInfo from "../EventInfo/EventInfo";
+import CreateEventModal from "../../CreateEventModal/CreateEventModal";
 import api from "../../../Api/appointments";
 import { AppointmentContext } from "../../../Context/AppointmentContext";
 import {
@@ -29,7 +30,7 @@ export const convertDate = (eventDate) => {
   return String(eventDate?.replace("T", " "))?.substring(0, 19);
 };
 
-function reducer(state, action) {
+export function reducer(state, action) {
   switch (action.type) {
     case "select":
       return {
@@ -66,9 +67,11 @@ export default function Events() {
     event: {},
   });
 
-  const { appointments, date } = useContext(AppointmentContext);
+  const { appointments, date, reload } = useContext(AppointmentContext);
   const [events, setEvents] = appointments;
-  const [currentDate, setCurrentDate] = date;
+  const [selectedDate, setSelectedDate] = date;
+  const [retreiveAppointments, setRetreiveAppointments] = reload;
+  const [isCreateEventModalVisible, setIsCreateEventModalVisible] = useState(false);
   const [isNotifyPopupVisible, setIsNotifyPopupVisible] = useState(false);
   const [responseMessage, setResponseMessage] = useState({});
 
@@ -81,13 +84,15 @@ export default function Events() {
     }, 300);
   }
 
+  function toggleCreateEventVisibility(){
+    setIsCreateEventModalVisible(!isCreateEventModalVisible);
+  }
+
   useEffect(() => {
     if (state.deleteEvent.startDateTime) {
       deleteAppointmentApi(state.deleteEvent.id)
       .then(()=>{
-        setEvents(()=>{
-          events.filter((event)=>event.startDateTime !== state.deleteEvent.startDateTime);
-        })
+        setEvents({})
       });
     }
   }, [state.deleteEvent]);
@@ -98,9 +103,7 @@ export default function Events() {
       updateAppointmentApi(state.event.id, state.updateEvent)
       .then((response) => {
         setResponseMessage(response);
-        setEvents((prevEvents)=>{
-          return [...prevEvents, state.event]
-          });
+        setEvents(state.event);
         NotifyPopup();
       })
       .catch((error) => {
@@ -114,10 +117,10 @@ export default function Events() {
   const [response, setResponse] = useState([]);
 
   useEffect(() => {
-    getAppointmentApi(currentDate).then((data) => {
+    getAppointmentApi(selectedDate).then((data) => {
       setResponse(data);
     });
-  }, [events, currentDate]);
+  }, [events, selectedDate,retreiveAppointments]);
 
   return (
     <>
@@ -144,6 +147,12 @@ export default function Events() {
       {state.eventInfoClicked && (
         <EventInfo event={state.event} dispatch={dispatch} />
       )}
+      {(selectedDate == moment())  && <div className="current-time-indicator" style={eventStyling(moment().format(),moment().add(20,'minutes').format())} onClick={()=>{
+        toggleCreateEventVisibility();
+      }}></div>}
+      {isCreateEventModalVisible &&
+        <CreateEventModal toggleCreateEventVisibility={toggleCreateEventVisibility}/>
+      }
 
       {/* {isConfirmationPopupVisible && (
         <ConfirmPopup

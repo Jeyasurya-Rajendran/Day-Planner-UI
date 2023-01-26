@@ -1,18 +1,19 @@
 import React, { createContext, useState } from "react";
 import moment from "moment";
-import appointments from "../Api/appointments";
 
 export const AppointmentContext = createContext("");
 
 export const AppointmentProvider = ({ children }) => {
-  const [currentDate, setCurrentDate] = useState(moment().format());
-  const [events, setEvents] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(moment().format());
+  const [events, setEvents] = useState({});
+  const [retreiveAppointments , setRetreiveAppointments] = useState(0);
 
   return (
     <AppointmentContext.Provider
       value={{
-        date: [currentDate, setCurrentDate],
-        appointments : [events, setEvents]
+        date: [selectedDate, setSelectedDate],
+        appointments : [events, setEvents],
+        reload: [retreiveAppointments, setRetreiveAppointments]
       }}
     >
       {children}

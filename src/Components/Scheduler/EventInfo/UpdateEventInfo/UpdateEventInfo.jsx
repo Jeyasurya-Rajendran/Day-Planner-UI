@@ -14,6 +14,7 @@ export default function UpdateEvent({ cancel, event, dispatch }) {
   return (
     <>
       <Card>
+        <div className="overlay">
         <div className="update-event-container">
           <h4>{event.title}</h4>
           <UpdateEventForm
@@ -22,6 +23,7 @@ export default function UpdateEvent({ cancel, event, dispatch }) {
             event={event}
             dispatch={dispatch}
           />
+        </div>
         </div>
       </Card>
     </>

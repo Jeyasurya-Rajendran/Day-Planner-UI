@@ -76,9 +76,6 @@ export default function UpdateEventForm({cancel, updatePost, event, dispatch }) 
           />
         </div>
         <div className="button-group">
-          <button className="custom-button-large button-dark" type="submit">
-            Update
-          </button>
           <button
             className="custom-button-large button-light"
             onClick={(e) => {
@@ -87,6 +84,9 @@ export default function UpdateEventForm({cancel, updatePost, event, dispatch }) 
             }}
           >
             Cancel
+          </button>
+          <button className="custom-button-large button-dark" type="submit">
+            Update
           </button>
         </div>
       </form>

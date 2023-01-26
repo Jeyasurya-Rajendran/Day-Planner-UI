@@ -5,11 +5,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function NotifyCard({response}){
     let category = '';
+
+    console.log(response);
+    
     switch(response.status){
         case 201:
             category = "created";
             break;
-        case 200:
+        case 204:
             category = "updated";
             break;
         case 400:

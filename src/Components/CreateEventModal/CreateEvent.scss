@@ -9,6 +9,7 @@
     z-index: 20;
     width: 100%;
     height: 100vh;
+    font-size: var(--font-sub-heading);
     
 }
 
@@ -50,22 +51,33 @@
     input, textarea{
         border: none;
         border-radius: 5px;
-        padding: 5px;
+        padding: 5px 10px;
         resize: none;
         background-color: var(--color-white);
         height: 30px;
-        // background-color: var(--color-light);
     }
 
     textarea{
         height: 60px;
     }
 
+    .radio-inputs{
+        display: flex;
+        justify-content: flex-end;
+        gap: 50px;
+    }
+
+    .checkbox-input, .radio-input{
+        display: flex;
+        align-items: center;
+        accent-color: var(--color-dominant);
+    }
+
     .text-input{
         display: flex;
         flex-direction: column;
     }
-    .time-group{
+    .time-group, .routine-input{
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 120px;

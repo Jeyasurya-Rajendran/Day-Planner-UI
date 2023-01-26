@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import moment from "moment";
-import CalendarDays from "./CalendarDays";
 import "./Calendar.scss";
 import buildCalender from "./BuildCalender";
 import dayStyles from "./StyleCalendar";
@@ -13,32 +12,33 @@ let count = 0;
 
 export default function Calendar() {
   const {date} = useContext(AppointmentContext);
-  const [currentDate, setCurrentDate] = date;
+  const [selectedDate, setSelectedDate] = date;
   const [calendar, setCalendar] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(moment());
+  const [generateDate, setGenerateDate] = useState(moment());
 
   const weekdays = ["S", "M", "T", "W", "T", "F", "S"];
 
   useEffect(() => {
-    setCalendar(buildCalender(selectedDate));
-    setCurrentDate(selectedDate);
-  }, [selectedDate]);
+    setCalendar(buildCalender(generateDate));
+  }, [generateDate]);
+
+  useEffect(()=>{
+    setGenerateDate(selectedDate);
+  },[selectedDate])
 
   return (
     <>
       <div className="calendar">
         <div className="month">
-          <h3>{moment(selectedDate).format('MMMM\'YY')}</h3>
+          <h3>{moment(generateDate).format('MMMM\'YY')}</h3>
           <div className="icon-group">
           <div>
             <span
               className="icon"
               onClick={(e) => {
                 e.preventDefault();
-                setSelectedDate((prevSelectedDate)=>{
-                  if(prevSelectedDate.format('YYYY-MM') > moment().format('YYYY-MM'))
-                    return moment(prevSelectedDate).subtract(1,'month');
-                  else return prevSelectedDate;
+                setGenerateDate((prevGenerateDate)=>{
+                  return moment(prevGenerateDate).subtract(1,'month');
                 });
               }}
             >
@@ -50,8 +50,8 @@ export default function Calendar() {
               className="icon"
               onClick={(e) => {
                 e.preventDefault();
-                setSelectedDate((prevSelectedDate)=>{
-                  return moment(prevSelectedDate).add(1,'month');
+                setGenerateDate((prevGenerateDate)=>{
+                  return moment(prevGenerateDate).add(1,'month');
                 })
 
               }}

@@ -1,14 +1,14 @@
 .update-event-container{
+
     padding: 20px;
     z-index: 3;
     position: fixed;
-    background-color: var(--color-light);
+    background-image: url(../../../../Asserts/Background.svg);
     display: flex;
     flex-direction: column;
-    right: 10px;
-    top: 50px;
-    width: 400px;
+    width: max-content;
     border-radius: 20px;
+    font-size: var(--font-sub-heading);
 
     .event-form{
         margin-top: 20px;

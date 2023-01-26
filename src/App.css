@@ -23,7 +23,7 @@ body{
 }
 
 ::-webkit-scrollbar-button {
-    height: 20px;
+    height: 10px;
   }
 
 ::-webkit-scrollbar-thumb {
@@ -67,6 +67,7 @@ button{
     --font-heading2 : 26px;
     --font-heading3 : 22px;
     --font-heading4 : 20px;
+    --font-sub-heading : 16px;
     --font-subject: 14px;
     --gradient : linear-gradient(to right bottom, #5927e5, #9657e9, #c087ef, #e0b7f6, #faeaff); 
     /* background-image: linear-gradient(to right bottom, #5927e5, #9657e9, #c087ef, #e0b7f6, #faeaff); */

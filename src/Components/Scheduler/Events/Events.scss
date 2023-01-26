@@ -22,3 +22,25 @@
         padding-left: 10px;
     }
 }   
+
+.current-time-indicator{
+    position: relative;
+    width: 868px;
+    margin: 0px;
+    margin-left: 7px;
+    border-bottom: 2px solid var(--color-dominant);
+    cursor: pointer;
+}
+
+.current-time-indicator::before{
+    content: ' ';
+    width: 2px;
+    height: 2px;
+    position: absolute;
+    margin-top: -6px;
+    margin-left: -1px;
+    border-radius: 5px;
+    border: 5px solid var(--color-dominant);
+    background-color: var(--color-dominant);
+    left: -2px;
+}

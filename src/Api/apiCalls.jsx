@@ -8,13 +8,14 @@ export function createAppointmentApi(request){
             endDateTime: request.endTime,
             title: request.title,
             description: request.description,
+            routine: request.selectedRoutine
         });
 
     return promise;
 }
 
-export function getAppointmentApi(currentDate){
-    const promise = api.get("/appointments?date=" + moment(currentDate).format("YYYY-MM-DD"));
+export function getAppointmentApi(selectedDate){
+    const promise = api.get("/appointments?date=" + moment(selectedDate).format("YYYY-MM-DD"));
 
     const getPromise = promise.then((response)=> response.data);
 
@@ -39,6 +40,13 @@ export function updateAppointmentApi(id, request){
     });
 
     return promise;
+}
 
-    // const updatePromise = promise.then
+export function getRoutines(){
+    const promise = api.get("/testApps");
+    return promise;
+}
+export function deleteRoutine(id){
+    const promise = api.delete("/testApp/" + id);
+    return promise;
 }

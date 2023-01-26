@@ -3,8 +3,6 @@ import moment from "moment/moment";
 import { timeline } from "./Timeline";
 import "./TimelineContainer.scss";
 
-let count = 0;
-
 export default function TimelineContainer({toggleCreateEventVisibility}) {
   
   return (

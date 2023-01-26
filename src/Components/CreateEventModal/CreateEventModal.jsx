@@ -29,9 +29,7 @@ export default function CreateEventModal({ toggleCreateEventVisibility }) {
       .then((response) => {
         setResponseMessage(response);
         NotifyPopup();
-        setEvents((prevEvents) => {
-          return [...prevEvents, request];
-        });
+        setEvents(request);
         setTimeout(() => {
           toggleCreateEventVisibility();
         }, 1000);

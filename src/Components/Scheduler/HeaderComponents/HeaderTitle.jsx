@@ -8,7 +8,7 @@ import "./HeaderTitle.scss";
 
 export default function HeaderTitle() {
   const {date} = useContext(AppointmentContext);
-  const [currentDate, setCurrentDate] = date;
+  const [selectedDate, setSelectedDate] = date;
 
   return (
     <>
@@ -17,7 +17,7 @@ export default function HeaderTitle() {
         {true && (
           <div className="date-header">
             <h4 style={{ "user-select": "none" }}>
-              {moment(currentDate).format("MMM Do YYYY")}
+              {moment(selectedDate).format("MMM Do YYYY")}
             </h4>
           </div>
         )}
@@ -29,7 +29,7 @@ export default function HeaderTitle() {
               className="icon"
               onClick={(e) => {
                 e.preventDefault();
-                setCurrentDate((prevDate) => {
+                setSelectedDate((prevDate) => {
                   if (prevDate > moment())
                     return moment(prevDate).subtract(1, "day");
                   else return prevDate;
@@ -44,7 +44,7 @@ export default function HeaderTitle() {
               className="icon"
               onClick={(e) => {
                 e.preventDefault();
-                setCurrentDate((prevDate) => {
+                setSelectedDate((prevDate) => {
                   return moment(prevDate).add(1, "day");
                 });
               }}

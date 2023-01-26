@@ -5,10 +5,10 @@ import { AppointmentContext } from "../../Context/AppointmentContext";
 
 export default function Date() {
   const { date, toggleDatePickerVisibility } = useContext(AppointmentContext);
-  const [currentDate, setCurrentDate] = date;
+  const [selectedDate, setSelectedDate] = date;
   const [isDatePickerVisible, setisDatePickerVisible] = toggleDatePickerVisibility;
 
-  const [dateValue, setDateValue] = useState(moment(currentDate).format("YYYY-MM-DD"));
+  const [dateValue, setDateValue] = useState(moment(selectedDate).format("YYYY-MM-DD"));
 
   return (
     <div className="date-input">
@@ -26,7 +26,7 @@ export default function Date() {
         className="submit"
         onClick={(e) => {
           e.preventDefault();
-          setCurrentDate(dateValue);
+          setSelectedDate(dateValue);
           setisDatePickerVisible(false);
         }}
       >
