@@ -1,0 +1,28 @@
+.remaining-events{
+    position: absolute;
+    bottom: 30px;
+    right: -250px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all linear 0.2s;
+
+    .remaining-events-icon{
+        padding: 5px 10px;
+        background-color: var(--color-light);
+        border-radius: 30px;
+        cursor: pointer;
+    }
+
+    .remaining-events-container{
+        font-size: var(--font-sub-heading);
+        padding: 20px;
+        background-color: var(--color-light-secondary);
+        border-radius: 20px;
+    }
+}
+
+.remaining-events-visible{
+    right: 0px;
+    transition: all linear 0.2s;
+}

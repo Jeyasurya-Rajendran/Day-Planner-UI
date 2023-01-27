@@ -16,7 +16,7 @@ export default function UpdateEvent({ cancel, event, dispatch }) {
       <Card>
         <div className="overlay">
         <div className="update-event-container">
-          <h4>{event.title}</h4>
+          <h4>Update Appointment</h4>
           <UpdateEventForm
             cancel={cancel}
             updatePost={updatePost}

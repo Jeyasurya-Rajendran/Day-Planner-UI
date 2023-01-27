@@ -1,7 +1,21 @@
-import React from "react";
+import React, {useCallback, useEffect} from "react";
 import "./ConfirmPopup.scss";
 
 export default function ConfirmPopup({ message, cancel, event, dispatch, type }) {
+
+  const escFunction = useCallback((event) => {
+    if (event.key === "Escape") {
+      cancel();
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keydown", escFunction, false);
+
+    return () => {
+      document.removeEventListener("keydown", escFunction, false);
+    };
+  }, []);
 
   return (
     <div className="overlay">

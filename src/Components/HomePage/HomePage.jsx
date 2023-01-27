@@ -8,6 +8,7 @@ import Calendar from "../Calendar/Calendar";
 import EventsContainer from "../Scheduler/EventsContainer";
 import "./HomePage.scss";
 import Routines from "../Routines/Routines";
+import EventRemaining from "../EventRemaining/EventRemaining";
 
 export default function HomePage() {
   const [isCreateEventVisible, setIsCreateEventVisible] = useState(false);
@@ -42,6 +43,7 @@ export default function HomePage() {
         </div>
         <Routines />
       </Card>
+      <EventRemaining />
     </div>
   );
 }

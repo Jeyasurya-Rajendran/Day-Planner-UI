@@ -1,6 +1,8 @@
 import moment from "moment";
 import React, { useState, useContext } from "react";
 import { AppointmentContext } from "../../Context/AppointmentContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStarOfLife } from "@fortawesome/free-solid-svg-icons";
 
 
 export default function EventForm({ addPost, toggleCreateEventVisibility }) {
@@ -45,7 +47,12 @@ export default function EventForm({ addPost, toggleCreateEventVisibility }) {
     <>
       <form className="event-form" onSubmit={eventSubmit}>
         <div className="text-input">
-          <label className="text-title">Title</label>
+          <div className="required-input">
+            <label className="text-title">
+              Title
+            </label>
+            <FontAwesomeIcon icon={faStarOfLife} className="required-symbol"/>
+          </div>
           <input
             className="title-input"
             type="text"
@@ -56,14 +63,16 @@ export default function EventForm({ addPost, toggleCreateEventVisibility }) {
               setTitle(e.target.value);
             }}
             required
-            // oninvalid="this.setCustomValidity('Please enter your name');"
-            // pattern="^[a-zA-Z0-9':-_]+( +[a-zA-Z0-9':-_ ]+)*$"
-            // title="Start with alphabets, give only single spaces between words"
           ></input>
         </div>
         <div className="time-group">
           <div className="date-time">
-            <label>From</label>
+          <div className="required-input">
+            <label className="text-title">
+              From
+            </label>
+            <FontAwesomeIcon icon={faStarOfLife} className="required-symbol"/>
+          </div>
             <input
               type="datetime-local"
               value={startTime}
@@ -75,7 +84,12 @@ export default function EventForm({ addPost, toggleCreateEventVisibility }) {
             ></input>
           </div>
           <div className="date-time">
-            <label>To</label>
+          <div className="required-input">
+            <label className="text-title">
+              To
+            </label>
+            <FontAwesomeIcon icon={faStarOfLife} className="required-symbol"/>
+          </div>
             <input
               type="datetime-local"
               value={endTime}
@@ -95,6 +109,7 @@ export default function EventForm({ addPost, toggleCreateEventVisibility }) {
                 setIsRoutine((prevRoutine) => {
                   return !prevRoutine;
                 });
+                setSelectedRoutine(1);
               }}
               value={isRoutine}
             />
@@ -104,9 +119,9 @@ export default function EventForm({ addPost, toggleCreateEventVisibility }) {
             <div className="radio-input" id="week">
               <input
                 type={"radio"}
-                multiple={"false"}
                 disabled={!isRoutine}
                 name="routine"
+                checked={true}
                 onChange={() => {
                   setSelectedRoutine(1);
                 }}
@@ -116,7 +131,6 @@ export default function EventForm({ addPost, toggleCreateEventVisibility }) {
             <div className="radio-input">
               <input
                 type={"radio"}
-                multiple={"false"}
                 disabled={!isRoutine}
                 name="routine"
                 onChange={() => {

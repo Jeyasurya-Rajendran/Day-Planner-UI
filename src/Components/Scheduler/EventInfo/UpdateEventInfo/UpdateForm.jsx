@@ -1,5 +1,5 @@
 import moment from "moment";
-import React, {useState} from "react";
+import React, {useState, useCallback, useEffect} from "react";
 import { convertDate } from "../../Events/Events";
 import "./UpdateForm.scss";
 
@@ -9,6 +9,20 @@ export default function UpdateEventForm({cancel, updatePost, event, dispatch }) 
   const [description, setDescription] = useState(event.description);
   const [startDateTime, setStartTime] = useState(event.startDateTime);
   const [endDateTime, setEndTime] = useState(event.endDateTime);
+
+  const escFunction = useCallback((event) => {
+    if (event.key === "Escape") {
+      cancel();
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keydown", escFunction, false);
+
+    return () => {
+      document.removeEventListener("keydown", escFunction, false);
+    };
+  }, []);
 
   return (
     <>

@@ -3,17 +3,16 @@
     background-color: var(--color-light);
     color: var(--color-black);
     width: 90%;
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 10px 22px;
     left: 45px;
-    box-shadow: 1px 3px 7px var(--color-dominant);
+    box-shadow: 1px 1px 7px var(--color-dominant-secondary);
     display: flex;
     flex-direction: column;
     justify-content: center;
     overflow: hidden;
     line-height: 2;
     transition: height 1s all;
-    // border-left: 5px solid var(--color-dominant);
     cursor: pointer;
 
     .event-title{

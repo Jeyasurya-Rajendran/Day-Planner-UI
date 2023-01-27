@@ -1,9 +1,9 @@
 .update-event-container{
 
-    padding: 20px;
+    padding: 30px;
     z-index: 3;
     position: fixed;
-    background-image: url(../../../../Asserts/Background.svg);
+    background-color: var(--color-form);
     display: flex;
     flex-direction: column;
     width: max-content;

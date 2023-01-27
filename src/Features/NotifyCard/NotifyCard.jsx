@@ -5,8 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function NotifyCard({response}){
     let category = '';
-
-    console.log(response);
     
     switch(response.status){
         case 201:

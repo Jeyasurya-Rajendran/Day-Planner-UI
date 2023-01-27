@@ -68,16 +68,16 @@
         .selected {
             background-color: var(--color-dominant);
             border-radius: 50%;
-            color: var(--color-white);
+            color: white;
         }
 
         .before {
-            color: rgba(black,0.7);
+            color: rgba(black,0.5);
             cursor: default;
         }
 
         .today {
-            color: #5928df;
+            color: rgb(255 0 70);
         }
     }
 }

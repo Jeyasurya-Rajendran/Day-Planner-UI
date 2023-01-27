@@ -1,12 +1,11 @@
 .timeline{
     display: flex;
-    height: 57.6px;
-    // background-color: white;
+    height: 60px;
     position: relative;
-    border-top: 3px dotted rgb(212, 212, 212);
 
     .time-event-space{
         width: 100%;
+        border-top: 3px dotted var(--color-cadet-gray);
     }
 
 }
@@ -22,10 +21,10 @@
         justify-content: center;
         border-radius: 10px;
         color: #141414;
-        background-color: rgb(232 224 255);
+        background-color: var(--color-light-secondary);
         font-size: 12px;
         padding: 4px 0px;
         font-weight: bold;
-        border: 1px solid #e0b7f6;
+        border: 1px solid var(--color-light);
     }
 }

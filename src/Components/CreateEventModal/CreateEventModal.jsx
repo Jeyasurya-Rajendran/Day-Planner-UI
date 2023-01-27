@@ -8,8 +8,9 @@ import { AppointmentContext } from "../../Context/AppointmentContext";
 import { createAppointmentApi } from "../../Api/apiCalls";
 
 export default function CreateEventModal({ toggleCreateEventVisibility }) {
-  const { appointments } = useContext(AppointmentContext);
+  const { appointments, reload } = useContext(AppointmentContext);
   const [events, setEvents] = appointments;
+  const [retreiveAppointments, setRetreiveAppointments] = reload;
 
   const [event, setEvent] = useState({});
   const [responseMessage, setResponseMessage] = useState({});
@@ -33,6 +34,9 @@ export default function CreateEventModal({ toggleCreateEventVisibility }) {
         setTimeout(() => {
           toggleCreateEventVisibility();
         }, 1000);
+        setRetreiveAppointments((prevLoad)=>{
+          return prevLoad+1;
+        })
       })
       .catch((error) => {
         setResponseMessage(error.response);

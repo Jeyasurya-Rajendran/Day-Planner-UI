@@ -14,9 +14,17 @@
 
     .icon-group{
         display: flex;
+        align-items: center;
         gap: 10px;
         font-size: 20px;
         color: var(--color-black);
+        .today-button{
+            font-size: var(--font-sub-heading);
+            background-color: var(--color-light);
+            padding: 6px 10px;
+            border-radius: 30px;
+            cursor: pointer;
+        }
         .icon{
             padding: 5px 13px 2px;
             background-color: white;

@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import moment from "moment/moment";
 import { timeline } from "./Timeline";
 import "./TimelineContainer.scss";
+import { AppointmentContext } from "../../Context/AppointmentContext";
 
 export default function TimelineContainer({toggleCreateEventVisibility}) {
   
+  const {date} = useContext(AppointmentContext);
+  const [selectedDate, setSelectedDate] = date;
   return (
     <>
       {timeline.map((time) => {
@@ -15,7 +18,8 @@ export default function TimelineContainer({toggleCreateEventVisibility}) {
             </div>
             <div className="time-event-space" onClick={(e)=>{
               e.preventDefault();
-              toggleCreateEventVisibility();
+              if(moment(selectedDate) >= moment().subtract(1,"day"))
+                toggleCreateEventVisibility();
             }}>
             </div>
           </div>

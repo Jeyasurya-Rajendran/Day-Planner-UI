@@ -25,7 +25,6 @@ export default function Routines() {
 
   useEffect(() => {
     getRoutines().then((routines) => {
-      console.log('call happening');
       setRoutines(routines.data);
     });
   },[events,retreiveAppointments]);
@@ -68,10 +67,6 @@ export default function Routines() {
                   <div>
                     {routine.startTime.substring(0,5)} - {routine.endTime.substring(0,5)}
                   </div>
-                  {/* <div>
-                  {routines[routine]?.isMonth && (moment(routines[routine]?.startDateTime).format('MMM'))} {moment(routines[routine]?.startDateTime).format("hh:mm A")}{" "}
-                    - {moment(routines[routine]?.endDateTime).format("hh:mm A")}
-                  </div> */}
                 </div>
               );
             })}

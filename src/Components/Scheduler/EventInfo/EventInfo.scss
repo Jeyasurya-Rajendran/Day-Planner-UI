@@ -2,15 +2,15 @@
     position: absolute;
     width: 100%;
     background-color: var(--color-dominant);
-    border-radius: 20px;
+    border-radius: 10px;
     left: 44px;
     transition: all 2s;
 
     .event-info-container {
         background-color: var(--color-light);
         padding: 14px 22px 24px;
-        border-radius: 20px;
-        box-shadow: 3px 5px 10px var(--color-dominant);
+        border-radius: 10px;
+        box-shadow: 3px 5px 10px var(--color-dominant-secondary);
         min-height: inherit;
     }
 

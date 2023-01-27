@@ -1,13 +1,9 @@
 body{
     font-family: 'Poppins';
     font-size: var(--font-subject);
-    background-color: #fdf5ff;
-    background-image: url(./Asserts/Background.svg);
-    /* background-image: radial-gradient( #bea2e3, #d3b5eb, #eecdff, #faeaff); */
-    /* background-image: linear-gradient(to bottom, #9657e9, #c087ef, #e0b7f6, #faeaff); */
-    /* background-image: linear-gradient(to bottom, #683ce0c5, #9657e9, #c087ef, #e0b7f6, #faeaff); */
+    background-image: url(./Asserts/Background1.jpg);
+    backdrop-filter: blur(100px);
     opacity: 0.8;
-    backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(20px);
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -57,11 +53,21 @@ button{
 }
 
 :root{
-    --color-dominant-solid : #5928dfe3;
+    /* --color-dominant-solid : #5928dfe3;
     --color-dominant : #5928dfc5;
     --color-light : #FAEAFF;
     --color-white : white;
-    --color-black : black;
+    --color-black : black; */
+
+    --color-dominant : black;
+    --color-dominant-secondary : #AA98A9;
+    --color-light: white;
+    --color-light-secondary: #FAF9F6;
+    --color-cadet-gray: #b28dc4;
+    --color-white: white;
+    --color-form : #e0d0ee;
+    
+
 
     --font-heading1 : 32px;
     --font-heading2 : 26px;

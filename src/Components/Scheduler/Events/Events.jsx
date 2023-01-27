@@ -3,7 +3,6 @@ import moment from "moment";
 import "./Events.scss";
 import EventInfo from "../EventInfo/EventInfo";
 import CreateEventModal from "../../CreateEventModal/CreateEventModal";
-import api from "../../../Api/appointments";
 import { AppointmentContext } from "../../../Context/AppointmentContext";
 import {
   getAppointmentApi,
@@ -93,21 +92,25 @@ export default function Events() {
       deleteAppointmentApi(state.deleteEvent.id)
       .then(()=>{
         setEvents({})
+        setRetreiveAppointments((prevLoad)=>{
+          return prevLoad+1;
+        })
       });
     }
   }, [state.deleteEvent]);
 
   useEffect(() => {
     if (state.updateEvent.startDateTime) {
-      console.log(state.updateEvent);
       updateAppointmentApi(state.event.id, state.updateEvent)
       .then((response) => {
         setResponseMessage(response);
         setEvents(state.event);
         NotifyPopup();
+        setRetreiveAppointments((prevLoad)=>{
+          return prevLoad+1;
+        })
       })
       .catch((error) => {
-        console.log(error.response);
         setResponseMessage(error.response);
         NotifyPopup();
       });
@@ -147,7 +150,7 @@ export default function Events() {
       {state.eventInfoClicked && (
         <EventInfo event={state.event} dispatch={dispatch} />
       )}
-      {(selectedDate == moment())  && <div className="current-time-indicator" style={eventStyling(moment().format(),moment().add(20,'minutes').format())} onClick={()=>{
+      {(moment(selectedDate).format('L') == moment().format('L'))  && <div className="current-time-indicator" style={eventStyling(moment().format(),moment().add(20,'minutes').format())} onClick={()=>{
         toggleCreateEventVisibility();
       }}></div>}
       {isCreateEventModalVisible &&

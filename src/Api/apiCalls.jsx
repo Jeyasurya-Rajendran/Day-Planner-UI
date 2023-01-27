@@ -43,10 +43,10 @@ export function updateAppointmentApi(id, request){
 }
 
 export function getRoutines(){
-    const promise = api.get("/testApps");
+    const promise = api.get("/routines");
     return promise;
 }
 export function deleteRoutine(id){
-    const promise = api.delete("/testApp/" + id);
+    const promise = api.delete("/routines/" + id);
     return promise;
 }

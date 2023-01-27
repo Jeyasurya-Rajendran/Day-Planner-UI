@@ -37,15 +37,20 @@ export default function EventsContainer({ response }) {
             <div>
               <div className="icon-group">
                 <span
+                  className="today-button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setSelectedDate(moment());
+                  }}
+                >
+                  Today
+                </span>
+                <span
                   className="icon"
                   onClick={(e) => {
                     e.preventDefault();
                     setSelectedDate((prevSelectedDate) => {
-                      // if (
-                      //   prevSelectedDate.format('ll') > moment().format('ll')
-                      // )
-                        return moment(prevSelectedDate).subtract(1, "day");
-                      // else return moment(prevSelectedDate);
+                      return moment(prevSelectedDate).subtract(1, "day");
                     });
                   }}
                 >

@@ -1,5 +1,5 @@
 import moment from "moment";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useCallback, useEffect } from "react";
 
 import { convertDate } from "../Events/Events";
 import "./EventInfo.scss";
@@ -45,10 +45,22 @@ export default function EventInfo({ event, dispatch }) {
   function CancelUpdation() {
     setIsUpdateFormVisible(false);
   }
-  // console.log(event.routine);
+  const escFunction = useCallback((event) => {
+    if (event.key === "Escape") {
+      dispatch({ type: "cancel" });
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("keydown", escFunction, false);
+
+    return () => {
+      document.removeEventListener("keydown", escFunction, false);
+    };
+  }, []);
+
   return (
     <>
-      {/* <Card> */}
       <div className="event-info" style={eventStyle}>
         <div className="event-info-container">
           <div className="event-context">
