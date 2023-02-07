@@ -1,0 +1,47 @@
+.event-info {
+    position: absolute;
+    width: 100%;
+    background-color: var(--color-dominant);
+    border-radius: 10px;
+    left: 44px;
+    transition: all 2s;
+
+    .event-info-container {
+        background-color: var(--color-light);
+        padding: 14px 22px 24px;
+        border-radius: 10px;
+        box-shadow: 3px 5px 10px var(--color-dominant-secondary);
+        min-height: inherit;
+    }
+
+    .event-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .event-description {
+        margin-top: 12px;
+    }
+    .event-duration{
+        margin-top: 5px;
+    }
+    
+    .icon-group{
+        display: flex;
+        gap: 20px;
+        padding: 5px;
+        font-size: 16px;
+    }
+
+    .edit-icon, .delete-icon, .cancel-icon{
+        cursor: pointer;
+    }
+}
+
+.button-group {
+    margin-top: 20px;
+    padding: 10px;
+    display: flex;
+    gap: 50px;
+}

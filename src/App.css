@@ -1,38 +1,86 @@
-.App {
-  text-align: center;
+body{
+    font-family: 'Poppins';
+    font-size: var(--font-subject);
+    background-image: url(./Asserts/Background1.jpg);
+    backdrop-filter: blur(100px);
+    opacity: 0.8;
+    -webkit-backdrop-filter: blur(20px);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+    height: 100vh;
+    overflow: hidden;
+    user-select: none;
+    margin: 0px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+::-webkit-scrollbar {
+    width: 7px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+::-webkit-scrollbar-button {
+    height: 10px;
   }
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-dominant);
+    border-radius: 30px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+::-webkit-scrollbar-track{
+    margin-right: 50px;
+    background-clip: padding-box;
+
 }
 
-.App-link {
-  color: #61dafb;
+
+input,button,textarea{
+    font-family: 'Poppins';
+    font-size: var(--font-subject);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h1{ font-size: var(--font-heading1); margin: 10px 0px;} 
+h2{ font-size: var(--font-heading2); margin: 10px 0px;} 
+h3{ font-size: var(--font-heading3); margin: 10px 0px;} 
+h4,h5,h6{ font-size: var(--font-heading4); margin: 10px 0px;}
+
+
+button{
+    font-family: 'Nunito';
+    font-weight: bold;
+    cursor: pointer;
+    /* font-size: var(--font-subject); */
+}
+
+:root{
+    /* --color-dominant-solid : #5928dfe3;
+    --color-dominant : #5928dfc5;
+    --color-light : #FAEAFF;
+    --color-white : white;
+    --color-black : black; */
+
+    --color-dominant : black;
+    --color-dominant-secondary : #AA98A9;
+    --color-light: white;
+    --color-light-secondary: #FAF9F6;
+    --color-cadet-gray: #b28dc4;
+    --color-white: white;
+    --color-form : #e0d0ee;
+    
+
+
+    --font-heading1 : 32px;
+    --font-heading2 : 26px;
+    --font-heading3 : 22px;
+    --font-heading4 : 20px;
+    --font-sub-heading : 16px;
+    --font-subject: 14px;
+    --gradient : linear-gradient(to right bottom, #5927e5, #9657e9, #c087ef, #e0b7f6, #faeaff); 
+    /* background-image: linear-gradient(to right bottom, #5927e5, #9657e9, #c087ef, #e0b7f6, #faeaff); */
+}
+
+.align-centre{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
